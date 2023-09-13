@@ -1,0 +1,4 @@
+.env
+*.pem
+/mysql/
+/node/node_modules/

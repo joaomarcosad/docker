@@ -1,0 +1,29 @@
+# Estágio de construção
+FROM node:15 AS build
+
+WORKDIR /usr/src/app
+
+# Copie o arquivo package.json e package-lock.json
+COPY package*.json .
+COPY .env . 
+
+# Instale as dependências do projeto, incluindo o pacote 'mysql'
+RUN npm install
+
+# Copie o restante dos arquivos do projeto
+COPY . .
+
+# Estágio final
+FROM node:15.6.0-alpine
+
+WORKDIR /usr/src/app
+
+# Copie os arquivos do estágio de construção
+COPY --from=build /usr/src/app .
+
+# Instale o módulo 'dotenv' no estágio final
+RUN npm install dotenv
+
+EXPOSE 3000
+
+CMD [ "node", "index.js" ]
