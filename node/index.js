@@ -17,7 +17,7 @@ module.exports = config;
 const mysql = require('mysql')
 const connection = mysql.createConnection(config)
 
-const sql = `INSERT INTO people(name) values ('Wesley')`
+const sql = `INSERT INTO people(name) values ('ABC')`
 connection.query(sql)
 connection.end()
 
